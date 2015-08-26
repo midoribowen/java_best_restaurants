@@ -1,8 +1,29 @@
-<h1>Home Page</h1>
-<form action='/newpage' method=''>
-  <div class='form-group'>
-    <label></label>
-    <input type="" name="" id="" class="form-control">
-  </div>
-  <button type="submit" id="" class='btn'>Submit!</button>
-</form>
+<h2 class="well">Discover Portland's Food Carts</h2>
+
+<div class="container">
+  <h4>Keep track of your favorite food carts!</h4>
+</div>
+
+<hr/>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <td>Food Cart Name</td>
+      <td>Cuisine</td>
+      <td>Price Range</td>
+    </tr>
+  </thead>
+  <tbody>
+    #foreach ($restaurant in $restaurants)
+      <tr>
+        <td>$restaurant.getName()</td>
+        <td>$restaurant.getCuisineType()</td>
+        <td>$restaurant.getPriceRange()</td>
+      </tr>
+    #end
+  </tbody>
+</table>
+
+
+<a href="/new-restaurant" class="btn btn-warning">Add Food Cart</a>

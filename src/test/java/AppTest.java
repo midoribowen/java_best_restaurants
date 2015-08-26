@@ -21,19 +21,9 @@ public class AppTest extends FluentTest {
   @ClassRule
   public static ServerRule server = new ServerRule();
 
-  // ~~INTEGRATION TESTING~~
-  // @Test
-  // public void rootTest() {
-  //   goTo("http://localhost:4567/");
-  //   assertThat(pageSource()).contains("Something");
-  // }
-  //
-  // @Test
-  // public void newPage_desiredResult() {
-  //   goTo("starting_page_url");
-  //   fill("#input_id").with("input");
-  //   submit(".btn");
-  //   assertThat(pageSource()).contains("Some result of input");
-  // }
-
+  @Test
+  public void rootTest() {
+    goTo("http://localhost:4567/");
+    assertThat(pageSource()).contains("Discover Portland's Food Carts");
+  }
 }

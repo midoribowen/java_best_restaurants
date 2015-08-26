@@ -15,34 +15,34 @@ public class PriceTest {
 
   @Test
   public void getPriceRange_returnsPriceRange() {
-    Price newPrice = new Price(1);
-    assertEquals(1, newPrice.getPriceRange());
+    Price newPrice = new Price("$");
+    assertEquals("$", newPrice.getPriceRange());
   }
 
   @Test
   public void equals_returnsTrueIfPriceRangesAreTheSame() {
-    Price price1 = new Price(1);
-    Price price2 = new Price(1);
+    Price price1 = new Price("$");
+    Price price2 = new Price("$");
     assertEquals(true, price1.equals(price2));
   }
 
   @Test
   public void save_savesPriceToDatabase() {
-    Price myPrice = new Price(1);
+    Price myPrice = new Price("$");
     myPrice.save();
     assertTrue(Price.all().get(0).equals(myPrice));
   }
 
   @Test
   public void save_assignsIdToObject() {
-    Price myPrice = new Price(1);
+    Price myPrice = new Price("$");
     myPrice.save();
     assertEquals(Price.all().get(0).getPriceId(), myPrice.getPriceId());
   }
 
   @Test
   public void find_findsPriceInDatabase_true() {
-    Price myPrice = new Price(1);
+    Price myPrice = new Price("$");
     myPrice.save();
     Price savedPrice = Price.find(myPrice.getPriceId());
     assertTrue(myPrice.equals(savedPrice));
@@ -50,23 +50,23 @@ public class PriceTest {
 
   @Test
   public void update_updatesPriceObjectInMemory_true() {
-    Price myPrice = new Price(1);
+    Price myPrice = new Price("$");
     myPrice.save();
-    myPrice.update(1);
-    assertEquals(1, myPrice.getPriceRange());
+    myPrice.update("$$");
+    assertEquals("$$", myPrice.getPriceRange());
   }
 
   @Test
   public void update_updatesPriceInDatabase_true() {
-    Price myPrice = new Price(1);
+    Price myPrice = new Price("$");
     myPrice.save();
-    myPrice.update(2);
-    assertEquals(2, Price.all().get(0).getPriceRange());
+    myPrice.update("$$");
+    assertEquals("$$", Price.all().get(0).getPriceRange());
   }
 
   @Test
   public void delete_deletesPriceInDatabase_true() {
-    Price myPrice = new Price(1);
+    Price myPrice = new Price("$");
     myPrice.save();
     myPrice.delete();
     assertEquals(0, Price.all().size());
@@ -74,7 +74,7 @@ public class PriceTest {
 
   @Test
   public void getPrices_retrievesAllPricesFromDatabase_restaurantsList() {
-    Price myPrice = new Price(1);
+    Price myPrice = new Price("$");
     myPrice.save();
     Restaurant restaurant1 = new Restaurant("Sakura Sushi", 1, myPrice.getPriceId());
     restaurant1.save();

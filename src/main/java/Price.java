@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Price {
   private int price_id;
-  private int price_range;
+  private String price_range;
 
-  public Price (int price_range) {
+  public Price (String price_range) {
     this.price_range = price_range;
   }
 
@@ -14,7 +14,7 @@ public class Price {
     return price_id;
   }
 
-  public int getPriceRange() {
+  public String getPriceRange() {
     return price_range;
   }
 
@@ -41,7 +41,7 @@ public class Price {
       return false;
     } else {
       Price newPrice = (Price) otherPrice;
-      return this.getPriceRange() == newPrice.getPriceRange() &&
+      return this.getPriceRange().equals(newPrice.getPriceRange()) &&
         this.getPriceId() == newPrice.getPriceId();
     }
   }
@@ -56,7 +56,7 @@ public class Price {
     }
   }
 
-  public void update(int newPriceRange) {
+  public void update(String newPriceRange) {
     this.price_range = newPriceRange;
     try(Connection con = DB.sql2o.open()) {
       String sql = "UPDATE prices SET price_range=:price_range WHERE price_id=:id";

@@ -91,4 +91,24 @@ public class Restaurant {
         .executeUpdate();
     }
   }
+
+  public String getCuisineType() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM cuisine WHERE cuisine_id=:id";
+      Cuisine cuisine = con.createQuery(sql)
+        .addParameter("id", cuisine_id)
+        .executeAndFetchFirst(Cuisine.class);
+      return cuisine.getType();
+    }
+  }
+
+  public String getPriceRange() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM prices WHERE price_id=:id";
+      Price price = con.createQuery(sql)
+        .addParameter("id", price_id)
+        .executeAndFetchFirst(Price.class);
+      return price.getPriceRange();
+    }
+  }
 }
