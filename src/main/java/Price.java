@@ -46,9 +46,9 @@ public class Price {
     }
   }
 
-  public Price find(int id) {
+  public static Price find(int price_id) {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM price WHERE price_id=:id";
+      String sql = "SELECT * FROM prices WHERE price_id=:id";
       Price price = con.createQuery(sql)
         .addParameter("id", price_id)
         .executeAndFetchFirst(Price.class);
