@@ -76,12 +76,12 @@ public class Price {
     }
   }
 
-  public List<Price> getPrices() {
+  public List<Restaurant> getRestaurantsByPrice() {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM prices WHERE price_id=:id";
+      String sql = "SELECT * FROM restaurants WHERE price_id=:id";
       return con.createQuery(sql)
-        .addParameter("id", this.price_id)
-        .executeAndFetch(Price.class);
+        .addParameter("id", price_id)
+        .executeAndFetch(Restaurant.class);
     }
   }
 }

@@ -73,7 +73,7 @@ public class PriceTest {
   }
 
   @Test
-  public void getPrices_retrievesAllPricesFromDatabase_restaurantsList()() {
+  public void getPrices_retrievesAllPricesFromDatabase_restaurantsList() {
     Price myPrice = new Price(1);
     myPrice.save();
     Restaurant restaurant1 = new Restaurant("Sakura Sushi", 1, myPrice.getPriceId());
@@ -81,6 +81,6 @@ public class PriceTest {
     Restaurant restaurant2 = new Restaurant("Boxer Ramen", 1, myPrice.getPriceId());
     restaurant2.save();
     Restaurant[] restaurants = new Restaurant[] { restaurant1, restaurant2 };
-    assertTrue(myPrice.getPrices().containsAll(Arrays.asList(restaurants)));
+    assertTrue(myPrice.getRestaurantsByPrice().containsAll(Arrays.asList(restaurants)));
   }
 }

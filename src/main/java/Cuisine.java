@@ -77,11 +77,11 @@ public class Cuisine {
     }
   }
 
-  public List<Restaurant> getRestaurants() {
+  public List<Restaurant> getRestaurantsByCuisine() {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM cuisine WHERE cuisine_id=:id";
+      String sql = "SELECT * FROM restaurants WHERE cuisine_id=:id";
       return con.createQuery(sql)
-        .addParameter("id", this.cuisine_id)
+        .addParameter("id", cuisine_id)
         .executeAndFetch(Restaurant.class);
     }
   }

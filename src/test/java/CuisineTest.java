@@ -72,15 +72,15 @@ public class CuisineTest {
     assertEquals(0, Cuisine.all().size());
   }
 
-  // @Test
-  // public void getRestaurants_getsRestaurantsByCuisineId_true() {
-  //   Cuisine myCuisine = new Cuisine("Japanese");
-  //   myCuisine.save();
-  //   Restaurant restaurant1 = new Restaurant("Sakura Sushi", myCuisine.getCuisineId(), 2);
-  //   restaurant1.save();
-  //   Restaurant restaurant2 = new Restaurant("Boxer Ramen", myCuisine.getCuisineId(), 2);
-  //   restaurant2.save();
-  //   Restaurant[] restaurants = new Restaurant[] {restaurant1, restaurant2};
-  //   assertTrue(myCuisine.getRestaurants().containsAll(Arrays.asList(restaurants)));
-  // }
+  @Test
+  public void getRestaurants_getsRestaurantsByCuisine_true() {
+    Cuisine myCuisine = new Cuisine("Japanese");
+    myCuisine.save();
+    Restaurant restaurant1 = new Restaurant("Sakura Sushi", myCuisine.getCuisineId(), 2);
+    restaurant1.save();
+    Restaurant restaurant2 = new Restaurant("Boxer Ramen", myCuisine.getCuisineId(), 2);
+    restaurant2.save();
+    Restaurant[] restaurants = new Restaurant[] {restaurant1, restaurant2};
+    assertTrue(myCuisine.getRestaurantsByCuisine().containsAll(Arrays.asList(restaurants)));
+  }
 }
