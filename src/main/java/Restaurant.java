@@ -19,11 +19,11 @@ public class Restaurant {
     return name;
   }
 
-  public int getCuisine() {
+  public int getCuisineId() {
     return cuisine_id;
   }
 
-  public int getPrice() {
+  public int getPriceId() {
     return price_id;
   }
 
