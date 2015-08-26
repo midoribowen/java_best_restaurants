@@ -28,9 +28,8 @@ public class Cuisine {
 
   public void save() {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO cuisine (cuisine_id, type) VALUES (:cuisine_id, :type)";
+      String sql = "INSERT INTO cuisine (type) VALUES (:type)";
       this.cuisine_id = (int) con.createQuery(sql, true)
-        .addParameter("cuisine_id", cuisine_id)
         .addParameter("type", type)
         .executeUpdate()
         .getKey();
