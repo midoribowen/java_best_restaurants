@@ -101,4 +101,13 @@ public class Restaurant {
       return cuisine.getType();
     }
   }
+
+  public static void deleteRestaurantById(int restaurantId) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM restaurants WHERE id=:id";
+      con.createQuery(sql)
+        .addParameter("id", restaurantId)
+        .executeUpdate();
+    }
+  }
 }
