@@ -76,9 +76,9 @@ public class CuisineTest {
   public void getRestaurants_getsRestaurantsByCuisine_true() {
     Cuisine myCuisine = new Cuisine("Japanese");
     myCuisine.save();
-    Restaurant restaurant1 = new Restaurant("Sakura Sushi", myCuisine.getCuisineId(), 2);
+    Restaurant restaurant1 = new Restaurant("Sakura Sushi", myCuisine.getCuisineId(), "$");
     restaurant1.save();
-    Restaurant restaurant2 = new Restaurant("Boxer Ramen", myCuisine.getCuisineId(), 2);
+    Restaurant restaurant2 = new Restaurant("Boxer Ramen", myCuisine.getCuisineId(), "$");
     restaurant2.save();
     Restaurant[] restaurants = new Restaurant[] {restaurant1, restaurant2};
     assertTrue(myCuisine.getRestaurantsByCuisine().containsAll(Arrays.asList(restaurants)));
