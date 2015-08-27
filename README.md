@@ -1,25 +1,36 @@
 # Restaurant Ranking
 
-#### Epicodus exercise using Java and Postgres, 08.26.2015
+##### Epicodus exercise using Java and Postgres, 08.26.2015
 
-#### Summer Brochtrup, Momo Ozawa
+##### Summer Brochtrup, Momo Ozawa
 
 ## Description
 A website where users can add their favorite food carts by the type of cuisine they offer.
 
 ## Setup
 
-Open terminal and create `restaurant_ranking` database:
-```
-$ pg_dump restaurant_ranking > restaurant_ranking.sql
-$ psql restauarnt_ranking < restaurant_ranking.sql
-```
-
-Navigate to directory where this repository has been cloned and run gradle:
+Clone this repository:
 ```
 $ cd ~/Desktop
 $ git clone https://github.com/SummerBr/restaurant-ranking.git
 $ cd restaurant-ranking
+```
+
+Open terminal and run Postgres:
+```
+$ postgres
+```
+
+Open a new tab in terminal by pressing ⌘t and create `restaurant_ranking` database:
+```
+$ psql
+$ CREATE DATABASE restaurant_ranking;
+$ pg_dump restaurant_ranking > restaurant_ranking.sql
+$ psql restauarnt_ranking < restaurant_ranking.sql
+```
+
+Navigate backt to the directory where this repository has been cloned and run gradle:
+```
 $ gradle run
 ```
 
