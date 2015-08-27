@@ -16,6 +16,7 @@
       <th>Food Cart Name</th>
       <th>Cuisine</th>
       <th>Price Range</th>
+      <th>Remove</th>
     </tr>
   </thead>
   <tbody>
@@ -24,6 +25,7 @@
         <td>$restaurant.getName()</td>
         <td>$restaurant.getCuisineType()</td>
         <td>$restaurant.getPrice()</td>
+        <td><a href="/delete/$restaurant.getId()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></a></span></td>
       </tr>
     #end
   </tbody>
