@@ -32,11 +32,18 @@ public class App {
     //Show all added restaurants
     get("/restaurants", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
+
+      String cuisine_type = request.queryParams("cuisine_type");
+      Cuisine newCuisine = new Cuisine(cuisine_type);
+      newCuisine.save();
+
       String name = request.queryParams("name");
       Integer price_id = Integer.parseInt(request.queryParams("price_id"));
       Integer cuisine_id = Integer.parseInt(request.queryParams("cuisine_id"));
       Restaurant newRestaurant = new Restaurant(name, cuisine_id, price_id);
       newRestaurant.save();
+
+      model.put("cuisines", Cuisine.all());
       model.put("restaurants", Restaurant.all());
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
