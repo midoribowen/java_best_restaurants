@@ -14,13 +14,6 @@ public class App {
     staticFileLocation("/public"); // Relative path for images, css, etc.
     String layout = "templates/layout.vtl";
 
-    Boolean isPopulated = false;
-
-    if (!isPopulated) {
-      Price.populatePrices();
-      isPopulated = true;
-    }
-
     get("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       model.put("restaurants", Restaurant.all());
@@ -45,7 +38,7 @@ public class App {
         // grab from drop down menu
         cuisine_type = request.queryParams("existingCuisines");
       }
-      if (request.queryParams("existingCuisines") != "" && cuisine_type == "") {
+      if (request.queryParams("existingCuisines") != "new" && cuisine_type == "") {
         // grab from text field
         cuisine_type = request.queryParams("cuisine_type");
       }
@@ -54,9 +47,9 @@ public class App {
       newCuisine.save();
 
       String name = request.queryParams("name");
-      Integer price_id = Integer.parseInt(request.queryParams("price_id"));
+      String price = request.queryParams("price");
       Integer cuisine_id = newCuisine.getCuisineId();
-      Restaurant newRestaurant = new Restaurant(name, cuisine_id, price_id);
+      Restaurant newRestaurant = new Restaurant(name, cuisine_id, price);
       newRestaurant.save();
 
       model.put("cuisines", Cuisine.all());
