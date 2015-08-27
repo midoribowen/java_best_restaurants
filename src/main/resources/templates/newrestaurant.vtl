@@ -1,7 +1,6 @@
 <h2 class="well">Add a New Food Cart</h2>
 
 <form action="/restaurants" method="get">
-  <input type="hidden" id="cuisineId" name="cuisineId" value="$cuisine.getCuisineId()">
   <div class="form-group">
       <label for="name">Food Cart Name</label>
       <input id="name" name="name" type="text" class="form-control" placeholder="Ex. Momo & Summer's">
@@ -12,6 +11,7 @@
       <input id="price_id_two" name="price_id" type="radio" value="2">$$&nbsp;
       <input id="price_id_three" name="price_id" type="radio" value="3">$$$&nbsp;
   </div>
+
   <div class="form-group">
       <label for="cuisine_type">Cuisine Type:</label>&nbsp;
       <input type="text" name="cuisine_type" id="cuisine_type" class="form-control" placeholder="Ex. Japanese">
