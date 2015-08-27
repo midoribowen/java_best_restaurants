@@ -83,4 +83,16 @@ public class PriceTest {
     Restaurant[] restaurants = new Restaurant[] { restaurant1, restaurant2 };
     assertTrue(myPrice.getRestaurantsByPrice().containsAll(Arrays.asList(restaurants)));
   }
+
+  @Test
+  public void populatePrices_checkDatabaseForPriceRanges() {
+    Price.populatePrices();
+    String[] expected = new String[] {"$", "$$", "$$$"};
+    String[] priceRanges = new String[] {
+      Price.all().get(0).getPriceRange(),
+      Price.all().get(1).getPriceRange(),
+      Price.all().get(2).getPriceRange()
+    };
+    assertEquals(expected, priceRanges);
+  }
 }
