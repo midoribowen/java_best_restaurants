@@ -44,7 +44,8 @@ public class App {
       if (request.queryParams("cuisine_type") == "") {
         // grab from drop down menu
         cuisine_type = request.queryParams("existingCuisines");
-      } else {
+      }
+      if (request.queryParams("existingCuisines") != "" && cuisine_type == "") {
         // grab from text field
         cuisine_type = request.queryParams("cuisine_type");
       }
