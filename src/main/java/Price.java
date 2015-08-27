@@ -84,4 +84,13 @@ public class Price {
         .executeAndFetch(Restaurant.class);
     }
   }
+
+  public static void populatePrices() {
+    String priceRange = "";
+    for (int i=1; i<=3; i++) {
+      priceRange += "$";
+      Price newPrice = new Price(priceRange);
+      newPrice.save();
+    }
+  }
 }
