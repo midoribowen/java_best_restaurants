@@ -11,10 +11,23 @@
       <input id="price_id_two" name="price_id" type="radio" value="2">$$&nbsp;
       <input id="price_id_three" name="price_id" type="radio" value="3">$$$&nbsp;
   </div>
-
+  #if (!($cuisines.size() == 0))
+    <div class="form-group">
+    <select>
+      #foreach ($cuisine in $cuisines)
+      <option value="$cuisine.getType()">$cuisine.getType()</option>
+      #end
+    </select>
+      <label for="cuisine_type">Cuisine Type:</label>&nbsp;
+      <input type="text" name="cuisine_type" id="cuisine_type" class="form-control" placeholder="Ex. Japanese">
+    </div>
+  #else
   <div class="form-group">
       <label for="cuisine_type">Cuisine Type:</label>&nbsp;
       <input type="text" name="cuisine_type" id="cuisine_type" class="form-control" placeholder="Ex. Japanese">
   </div>
+  #end
+
+
   <button type="submit" class="btn btn-success">Add</button>
 </form>
