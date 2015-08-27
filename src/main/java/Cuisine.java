@@ -1,5 +1,7 @@
 import org.sql2o.*;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class Cuisine {
@@ -17,6 +19,15 @@ public class Cuisine {
 
   public String getType() {
     return type;
+  }
+
+  public static Set<String> allUnique() {
+    List<Cuisine> cuisineList = all();
+    Set<String> cuisineSet = new HashSet<String>();
+    for (Cuisine cuisine: cuisineList) {
+      cuisineSet.add(cuisine.getType());
+    }
+    return cuisineSet;
   }
 
   public static List<Cuisine> all() {

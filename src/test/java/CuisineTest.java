@@ -14,6 +14,15 @@ public class CuisineTest {
   }
 
   @Test
+  public void allUnique_onlyContainsUniqueValues() {
+    Cuisine cuisine1 = new Cuisine("Japanese");
+    cuisine1.save();
+    Cuisine cuisine2 = new Cuisine("Japanese");
+    cuisine2.save();
+    assertEquals(1, Cuisine.allUnique().size());
+  }
+
+  @Test
   public void getType_returnsType() {
     Cuisine newCuisine = new Cuisine("Japanese");
     assertEquals("Japanese", newCuisine.getType());

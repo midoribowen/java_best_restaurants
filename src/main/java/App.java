@@ -7,6 +7,8 @@ import static spark.Spark.*;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 public class App {
 
@@ -24,7 +26,7 @@ public class App {
     //Add restaurant page
     get("/new-restaurant", (request, reponse) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      model.put("cuisines", Cuisine.all());//makes cuisine types available in select
+      model.put("cuisines", Cuisine.allUnique());//makes cuisine types available in select
       model.put("template", "templates/newrestaurant.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -48,7 +50,7 @@ public class App {
       Integer cuisine_id = newCuisine.getCuisineId();
       Restaurant newRestaurant = new Restaurant(name, cuisine_id, price);
       newRestaurant.save();
-      model.put("cuisines", Cuisine.all());
+      model.put("cuisines", Cuisine.allUnique());
       model.put("restaurants", Restaurant.all());
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);

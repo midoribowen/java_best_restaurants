@@ -33,8 +33,8 @@
       <label for="existingCuisines" id="existingCuisines">Choose from existing cuisine type:</label>
       <select name="existingCuisines" id="cuisineSelect">
         <option disabled selected value="test">--</option>
-        #foreach ($cuisine in $cuisines)
-          <option value="$cuisine.getType()">$cuisine.getType()</option>
+        #foreach ($cuisineType in $cuisines)
+          <option value="$cuisineType">$cuisineType</option>
         #end
         <option value="new" id="new">Add a new type</option>
       </select>
