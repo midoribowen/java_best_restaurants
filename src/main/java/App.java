@@ -14,6 +14,8 @@ public class App {
     staticFileLocation("/public"); // Relative path for images, css, etc.
     String layout = "templates/layout.vtl";
 
+    Price.populatePrices();
+
     get("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       model.put("restaurants", Restaurant.all());
@@ -39,7 +41,7 @@ public class App {
 
       String name = request.queryParams("name");
       Integer price_id = Integer.parseInt(request.queryParams("price_id"));
-      Integer cuisine_id = Integer.parseInt(request.queryParams("cuisine_id"));
+      Integer cuisine_id = newCuisine.getCuisineId();
       Restaurant newRestaurant = new Restaurant(name, cuisine_id, price_id);
       newRestaurant.save();
 
