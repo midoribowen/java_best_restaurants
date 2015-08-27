@@ -26,7 +26,7 @@ public class App {
     //Add restaurant page
     get("/new-restaurant", (request, reponse) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      model.put("cuisineTypes", Cuisine.all());//makes cuisine types available in select
+      model.put("cuisines", Cuisine.all());//makes cuisine types available in select
       model.put("template", "templates/newrestaurant.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
