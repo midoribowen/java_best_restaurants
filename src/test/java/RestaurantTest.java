@@ -71,4 +71,14 @@ public class RestaurantTest {
     assertEquals(0, Restaurant.all().size());
   }
 
+  @Test
+  public void delete_deletesRestaurantById_true() {
+    Restaurant myRestaurant1 = new Restaurant("Lardo", 1, "$");
+    myRestaurant1.save();
+    Restaurant myRestaurant2 = new Restaurant("Mi Mero Mole", 2, "$");
+    myRestaurant2.save();
+    myRestaurant1.deleteRestaurantById(myRestaurant1.getId());
+    assertEquals(1, Restaurant.all().size());
+  }
+
 }
