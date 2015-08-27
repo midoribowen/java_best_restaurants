@@ -14,7 +14,12 @@ public class App {
     staticFileLocation("/public"); // Relative path for images, css, etc.
     String layout = "templates/layout.vtl";
 
-    Price.populatePrices();
+    Boolean isPopulated = false;
+
+    if (!isPopulated) {
+      Price.populatePrices();
+      isPopulated = true;
+    }
 
     get("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
@@ -35,7 +40,15 @@ public class App {
     get("/restaurants", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
 
-      String cuisine_type = request.queryParams("cuisine_type");
+      String cuisine_type = "";
+      if (request.queryParams("cuisine_type") == "") {
+        // grab from drop down menu
+        cuisine_type = request.queryParams("existingCuisines");
+      } else {
+        // grab from text field
+        cuisine_type = request.queryParams("cuisine_type");
+      }
+
       Cuisine newCuisine = new Cuisine(cuisine_type);
       newCuisine.save();
 
