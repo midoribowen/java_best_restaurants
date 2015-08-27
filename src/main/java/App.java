@@ -32,7 +32,6 @@ public class App {
     //Show all added restaurants
     get("/restaurants", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-
       String cuisine_type = "";
       if (request.queryParams("cuisine_type") == "") {
         // grab from drop down menu
@@ -42,17 +41,25 @@ public class App {
         // grab from text field
         cuisine_type = request.queryParams("cuisine_type");
       }
-
       Cuisine newCuisine = new Cuisine(cuisine_type);
       newCuisine.save();
-
       String name = request.queryParams("name");
       String price = request.queryParams("price");
       Integer cuisine_id = newCuisine.getCuisineId();
       Restaurant newRestaurant = new Restaurant(name, cuisine_id, price);
       newRestaurant.save();
-
       model.put("cuisines", Cuisine.all());
+      model.put("restaurants", Restaurant.all());
+      model.put("template", "templates/index.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/delete/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+
+      Integer restaurantId = Integer.parseInt(request.params(":id"));
+      Restaurant.deleteRestaurantById(restaurantId);
+
       model.put("restaurants", Restaurant.all());
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
