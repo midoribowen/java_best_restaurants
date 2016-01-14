@@ -10,14 +10,14 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -30,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: cuisine; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
+-- Name: cuisine; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
 CREATE TABLE cuisine (
@@ -63,7 +63,7 @@ ALTER SEQUENCE cuisine_id_seq OWNED BY cuisine.cuisine_id;
 
 
 --
--- Name: restaurants; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
+-- Name: restaurants; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
 CREATE TABLE restaurants (
@@ -114,6 +114,8 @@ ALTER TABLE ONLY restaurants ALTER COLUMN id SET DEFAULT nextval('restaurants_id
 --
 
 COPY cuisine (cuisine_id, type) FROM stdin;
+1	American
+2	Southern
 \.
 
 
@@ -121,7 +123,7 @@ COPY cuisine (cuisine_id, type) FROM stdin;
 -- Name: cuisine_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('cuisine_id_seq', 1, false);
+SELECT pg_catalog.setval('cuisine_id_seq', 2, true);
 
 
 --
@@ -129,6 +131,8 @@ SELECT pg_catalog.setval('cuisine_id_seq', 1, false);
 --
 
 COPY restaurants (id, name) FROM stdin;
+1	Screen Door
+2	Lardo
 \.
 
 
@@ -136,11 +140,11 @@ COPY restaurants (id, name) FROM stdin;
 -- Name: restaurants_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('restaurants_id_seq', 1, false);
+SELECT pg_catalog.setval('restaurants_id_seq', 2, true);
 
 
 --
--- Name: cuisine_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
+-- Name: cuisine_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
 ALTER TABLE ONLY cuisine
@@ -148,7 +152,7 @@ ALTER TABLE ONLY cuisine
 
 
 --
--- Name: restaurants_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
+-- Name: restaurants_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
 ALTER TABLE ONLY restaurants
@@ -168,3 +172,4 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
+
