@@ -98,4 +98,8 @@ public class Restaurant {
   public int getCuisineId() {
     return mCuisineId;
   }
+
+  public String getCuisineType() {
+    return Cuisine.find(mCuisineId).getType();
+  }
 }

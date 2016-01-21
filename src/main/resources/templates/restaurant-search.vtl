@@ -1,0 +1,33 @@
+<p>You searched for $userSearch</p>
+
+<div class="row">
+  <div class="col-md-8">
+  #if ($successfulsearch)
+    #foreach ($restaurant in $searchresults)
+      <div class="restaurant">
+        <strong>$restaurant.getName()</strong>
+        <p>$restaurant.getCuisineType()</p>
+      </div>
+    #end
+  #else
+    <p>Sorry! Your search was fruitless!</p>
+  #end
+  </div>
+
+  <div class="col-md-4 pull-right">
+    <p>Didn't find what you're looking for? Use the form to add a new restaurant.</p>
+
+    <form action="/restaurant/new" method="post">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="newname" id="name" class="form-control" required>
+        <select id="cuisineId" name="cuisineId" type="text" required>
+          #foreach($cuisine in $cuisines)
+            <option value="$cuisine.getId()">$cuisine.getType()</option>
+          #end
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Add!</button>
+    </form>
+  </div>
+</div>

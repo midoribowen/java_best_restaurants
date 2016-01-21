@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import static spark.Spark.*;
@@ -15,19 +16,44 @@ public class App {
     *******************************************************/
     get("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("cuisines", Cuisine.all());
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    /******************************************************
-    Students: TODO: Create page to add a new restaurant
-    *******************************************************/
-    get("/new-restaurant", (request, reponse) -> {
+    get("/restaurant-search", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      model.put("template", "templates/newrestaurant.vtl");
+
+      boolean successfulSearch = false;
+      String userSearch = request.queryParams("search").trim();
+      List<Restaurant> searchResults = Restaurant.search(userSearch);
+      if (!(searchResults.isEmpty())) {
+        successfulSearch = true;
+      }
+      model.put("successfulsearch", successfulSearch);
+      model.put("searchresults", searchResults);
+      model.put("userSearch", userSearch);
+
+      model.put("cuisines", Cuisine.all());
+
+      model.put("template", "templates/restaurant-search.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    post("/restaurant/new", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      String newName = request.queryParams("newname");
+      Restaurant newRestaurant = new Restaurant(newName);
+      newRestaurant.save();
+
+      Integer newCuisineId = Integer.parseInt(request.queryParams("cuisineId"));
+      newRestaurant.assignCuisine(newCuisineId);
+
+
+      model.put("restaurant", newRestaurant);
+      model.put("template", "templates/restaurant.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
     /******************************************************
     STUDENTS:
     TODO: Create page to display information about the selected restaurant

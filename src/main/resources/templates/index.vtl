@@ -1,1 +1,19 @@
+<form action="/" method="post">
+  <div class="form-group">
+    <label for="cuisineId">View By Cuisine</label>
+    <select id="cuisineId" name="cuisineId" type="text">
+      #foreach($cuisine in $cuisines)
+        <option value="$cuisine.getId()">$cuisine.getType()</option>
+      #end
+    </select>
+    <button type="submit" class="btn btn-danger">See Restaurants</button>
+  </div>
+</form>
 
+<form action="/restaurant-search" method="get">
+  <div class="form-group">
+    <label for="search">Search by Restaurant Name</label>
+    <input id="search" type="text" name="search" class="form-control" required>
+  </div>
+  <button type="submit" class="btn btn-warning">Search!</button>
+</form>
