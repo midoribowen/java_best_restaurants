@@ -47,4 +47,11 @@ public class RestaurantTest {
     assertTrue(Cuisine.find(myCuisine.getId())
       .equals(Cuisine.find(myRestaurant.getCuisineId())));
   }
+
+  @Test
+  public void search_returnsSimilarRestaurantsByName() {
+    Restaurant myRestaurant = new Restaurant("Local Boyz");
+    myRestaurant.save();
+    assertTrue(Restaurant.search("Local").contains(myRestaurant));
+  }
 }

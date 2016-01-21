@@ -68,10 +68,19 @@ public class Restaurant {
 
   public static Restaurant find(int id) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT id AS mId, name AS mName FROM restaurants WHERE id = :id";
+      String sql = "SELECT id AS mId, name AS mName, cuisine_id AS mCuisineId FROM restaurants WHERE id = :id";
       return con.createQuery(sql)
                 .addParameter("id", id)
                 .executeAndFetchFirst(Restaurant.class);
+    }
+  }
+
+  public static List<Restaurant> search(String userSearch) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT id AS mId, name AS mName, cuisine_id AS mCuisineId FROM restaurants WHERE name LIKE :userSearch";
+      return con.createQuery(sql)
+                .addParameter("userSearch", "%" + userSearch + "%")
+                .executeAndFetch(Restaurant.class);
     }
   }
 
