@@ -28,46 +28,60 @@ public class Cuisine {
     }
   }
 
-  //CREATE
   public void save() {
     try (Connection con = DB.sql2o.open()) {
-      /******************************************************
-        Students: TODO: Create sql query and execute update
-      *******************************************************/
+      String sql = "INSERT INTO cuisines(type) VALUES (:type)";
+      this.mId = (int) con.createQuery(sql, true)
+        .addParameter("type", this.mType)
+        .executeUpdate()
+        .getKey();
     }
   }
 
-  //READ
   public static List<Cuisine> all() {
     try (Connection con = DB.sql2o.open()) {
-      /******************************************************
-        Students: TODO: Create sql query and execute update
-      *******************************************************/
+      String sql = "SELECT id AS mId, type AS mType FROM cuisines";
+      return con.createQuery(sql)
+        .executeAndFetch(Cuisine.class);
     }
   }
 
-  //UPDATE
   public void update(String newType) {
     this.mType = newType;
     try(Connection con = DB.sql2o.open()) {
-      /******************************************************
-        Students: TODO: Create sql query and execute update
-      *******************************************************/
+      String sql = "UPDATE cuisines SET type = :newType WHERE id=:id";
+      con.createQuery(sql)
+         .addParameter("newType", newType)
+         .addParameter("id", this.mId)
+         .executeUpdate();
     }
   }
 
   public void delete() {
     try(Connection con = DB.sql2o.open()) {
-      /******************************************************
-        Students: TODO: Create sql query and execute update
-      *******************************************************/
+      String sql = "DELETE FROM cuisines WHERE id = :id";
+      con.createQuery(sql)
+         .addParameter("id", this.mId)
+         .executeUpdate();
     }
   }
 
-  /******************************************************
-    Students:
-    TODO: Create find method
-    TODO: Create method to get restaurants
-  *******************************************************/
+  public static Cuisine find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT id AS mId, type as mType FROM cuisines WHERE id=:id";
+      return con.createQuery(sql)
+                .addParameter("id", id)
+                .executeAndFetchFirst(Cuisine.class);
+    }
+  }
+
+  public List<Restaurant> getAllRestaurants() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT id AS mId, name as mName FROM restaurants WHERE cuisine_id=:id";
+      return con.createQuery(sql)
+                .addParameter("id", this.mId)
+                .executeAndFetch(Restaurant.class);
+    }
+  }
 
 }
