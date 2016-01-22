@@ -17,3 +17,9 @@
   </div>
   <button type="submit" class="btn btn-warning">Search!</button>
 </form>
+#if($usermadepost)
+  #foreach($restaurant in $cuisine.getAllRestaurants())
+    <strong><a href="/restaurant/$restaurant.getId()">$restaurant.getName()</a></strong>
+    <br>
+  #end
+#end

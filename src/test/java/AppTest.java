@@ -73,4 +73,24 @@ public class AppTest extends FluentTest {
     goTo("http://localhost:4567/restaurant/" + Integer.toString(newRestaurant.getId()));
     assertThat(pageSource()).contains("Chipotle");
   }
+
+  @Test
+  public void showAllRestaurantsInCuisine() {
+    Cuisine myCuisine = new Cuisine("Southern");
+    myCuisine.save();
+    Restaurant firstRestaurant = new Restaurant("Chipotle");
+    Restaurant secondRestaurant = new Restaurant("Shut Up And Eat");
+    Restaurant thirdRestaurant = new Restaurant("Local Boyz");
+    Restaurant fourthRestaurant = new Restaurant("Local Pie");
+    Restaurant fifthRestaurant = new Restaurant("Tweet");
+    firstRestaurant.save().assignCuisine(myCuisine.getId());
+    secondRestaurant.save().assignCuisine(myCuisine.getId());
+    thirdRestaurant.save().assignCuisine(myCuisine.getId());
+    fourthRestaurant.save().assignCuisine(myCuisine.getId());
+    fifthRestaurant.save().assignCuisine(myCuisine.getId());
+    goTo("http://localhost:4567/");
+    click("option", withText("Southern"));
+    submit(".btn-danger");
+    assertThat(pageSource()).contains("Tweet");
+  }
 }

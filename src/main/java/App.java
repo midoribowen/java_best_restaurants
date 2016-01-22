@@ -11,12 +11,20 @@ public class App {
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
 
-    /******************************************************
-      Students: TODO: Display all restaurants on main page
-    *******************************************************/
     get("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       model.put("cuisines", Cuisine.all());
+      model.put("template", "templates/index.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      boolean usermadepost = true;
+      Integer cuisineId = Integer.parseInt(request.queryParams("cuisineId"));
+      model.put("cuisine", Cuisine.find(cuisineId));
+      model.put("cuisines", Cuisine.all());
+      model.put("usermadepost", usermadepost);
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -61,7 +69,7 @@ public class App {
       Integer thisRestaurantId = Integer.parseInt(request.params("id"));
       Restaurant thisRestaurant = Restaurant.find(thisRestaurantId);
 
-      model.put("restaurant", thisRestaurant);      
+      model.put("restaurant", thisRestaurant);
       model.put("template", "templates/restaurant.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
