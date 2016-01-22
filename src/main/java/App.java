@@ -54,6 +54,17 @@ public class App {
       model.put("template", "templates/restaurant.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    get("/restaurant/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+
+      Integer thisRestaurantId = Integer.parseInt(request.params("id"));
+      Restaurant thisRestaurant = Restaurant.find(thisRestaurantId);
+
+      model.put("restaurant", thisRestaurant);      
+      model.put("template", "templates/restaurant.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
     /******************************************************
     STUDENTS:
     TODO: Create page to display information about the selected restaurant
